@@ -3,6 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Sarabun } from "next/font/google";
 
+import AppProvider from "./provider";
+
 const sarabun = Sarabun({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
@@ -21,7 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={sarabun.className}>{children}</body>
+      <body className={sarabun.className}>
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   );
 }
