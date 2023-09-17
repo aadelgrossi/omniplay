@@ -46,6 +46,9 @@ export default defineConfig({
             },
             text: {
               value: "#E8E9EB"
+            },
+            paper: {
+              value: "#E0DFD5"
             }
           }
         }
