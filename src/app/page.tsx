@@ -1,3 +1,4 @@
+import Input from "@/components/Input";
 import { styled, VStack } from "@/styled-system/jsx";
 
 export default function Home() {
@@ -15,6 +16,8 @@ export default function Home() {
           Elevate Your Gaming Experience: Browse and discover the greatest games
           out there!
         </styled.p>
+
+        <Input />
       </VStack>
     </styled.main>
   );
