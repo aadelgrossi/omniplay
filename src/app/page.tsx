@@ -1,25 +1,21 @@
-import { css } from "@/styled-system/css";
-import { vstack } from "@/styled-system/patterns";
+import { styled, VStack } from "@/styled-system/jsx";
 
 export default function Home() {
   return (
-    <main
-      className={vstack({
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "gray.900",
-      })}
-    >
-      <h1
-        className={css({
-          fontSize: "2xl",
-          fontWeight: "bold",
-          color: "slate.200",
-        })}
+    <styled.main minHeight="100vh" backgroundColor="gray.900">
+      <VStack
+        textAlign={["center", "flex-start"]}
+        alignItems={["center", "flex-start"]}
+        padding={[2, 5]}
       >
-        OmniPlay
-      </h1>
-    </main>
+        <styled.h1 textStyle="h1" color="primary">
+          OmniPlay
+        </styled.h1>
+        <styled.p textStyle="body" color="text">
+          Elevate Your Gaming Experience: Browse and discover the greatest games
+          out there!
+        </styled.p>
+      </VStack>
+    </styled.main>
   );
 }

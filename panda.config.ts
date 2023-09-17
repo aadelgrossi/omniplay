@@ -4,6 +4,9 @@ export default defineConfig({
     // Whether to use css reset
     preflight: true,
 
+    // Enable styled-jsx
+    jsxFramework: 'react',
+
     // Where to look for your css declarations
     include: ["./src/components/**/*.{js,jsx,ts,tsx}", "./src/app/**/*.{js,jsx,ts,tsx}"],
 
@@ -12,15 +15,43 @@ export default defineConfig({
 
     // Useful for theme customization
     theme: {
-      extend: {}
+      extend: {
+        textStyles: {
+          body: {
+            value: {
+              fontWeight: '400',
+              fontSize: 'md',
+            }
+          },
+          h1: {
+            value: {
+              fontWeight: 'bold',
+              fontSize: '5xl',
+            }
+          },
+          h2: {
+            value: {
+              fontWeight: 'semibold',
+              fontSize: '2xl',
+            }
+          },
+        },
+        tokens: {
+          colors: {
+            primary: {
+              value: "#D13953"
+            },
+            secondary: {
+              value: "#18203D"
+            },
+            text: {
+              value: "#E8E9EB"
+            }
+          }
+        }
+      }
     },
 
     // The output directory for your css system
     outdir: "styled-system",
-    globalCss: {
-      body:{
-        margin: 0,
-        padding: 0
-      }
-    }
 })
