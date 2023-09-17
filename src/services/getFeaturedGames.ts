@@ -16,7 +16,7 @@ type GamesResponse = {
 
 const getFeaturedGames = async (args: FeaturedGamesArgs) => {
   const {
-    ordering = "metacritic",
+    ordering = "-metacritic",
     dates = "2023-01-01,2023-12-01",
     page_size = 20,
   } = args;
