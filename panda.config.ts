@@ -32,7 +32,8 @@ export default defineConfig({
           h2: {
             value: {
               fontWeight: 'semibold',
-              fontSize: '2xl',
+              fontSize: 'xl',
+              lineHeight: "1.25"
             }
           },
         },
