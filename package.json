@@ -21,6 +21,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@pandacss/dev": "^0.15.0"
+    "@pandacss/dev": "^0.15.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0"
   }
 }
