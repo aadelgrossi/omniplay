@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 import Input from "@/components/Input";
 import { styled, VStack } from "@/styled-system/jsx";
 
-import ListGames from "./ListGames";
+import SearchGames from "./SearchGames";
 
 export default function Home() {
   return (
@@ -21,8 +21,7 @@ export default function Home() {
             games out there!
           </styled.p>
         </VStack>
-        <Input />
-        <ListGames />
+        <SearchGames />
       </Container>
     </styled.main>
   );

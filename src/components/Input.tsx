@@ -1,6 +1,8 @@
+import { InputHTMLAttributes } from "react";
+
 import { styled } from "@/styled-system/jsx";
 
-export default function Input() {
+export default function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <styled.input
       width="full"
@@ -12,6 +14,7 @@ export default function Input() {
         outlineColor: "primary",
         transition: "outline 0.2s ease-in-out",
       }}
+      {...props}
     />
   );
 }

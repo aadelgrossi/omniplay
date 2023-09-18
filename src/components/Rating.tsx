@@ -6,6 +6,8 @@ const Value = styled("span", {
 });
 
 export default function Rating({ value }: { value: number }) {
+  if (!value) return <></>;
+
   if (value <= 40)
     return (
       <Box bg="red.400">
