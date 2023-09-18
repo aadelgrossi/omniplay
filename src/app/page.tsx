@@ -2,6 +2,8 @@ import Container from "@/components/Container";
 import Input from "@/components/Input";
 import { styled, VStack } from "@/styled-system/jsx";
 
+import ListGames from "./ListGames";
+
 export default function Home() {
   return (
     <styled.main minHeight="100vh" backgroundColor="gray.900">
@@ -20,6 +22,7 @@ export default function Home() {
           </styled.p>
         </VStack>
         <Input />
+        <ListGames />
       </Container>
     </styled.main>
   );
