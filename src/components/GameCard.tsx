@@ -1,16 +1,39 @@
 import Image from "next/image";
+import Skeleton from "react-loading-skeleton";
 
 import { Game } from "@/services/types";
-import { HStack, styled } from "@/styled-system/jsx";
+import { Box, HStack, styled } from "@/styled-system/jsx";
 
 import Rating from "./Rating";
 
 const CardContent = styled("div", { base: { p: 4 } });
 const Title = styled("h2", { base: { textStyle: "h2", color: "paper" } });
 
-export default function GameCard(game: Game) {
+function CardSkeleton() {
   return (
-    <styled.div borderRadius="lg" key={game.id} bg="slate.800">
+    <Box borderRadius="lg" bg="slate.800">
+      <Skeleton
+        width="100%"
+        height="200px"
+        style={{
+          lineHeight: "unset",
+        }}
+      />
+      <CardContent>
+        <Skeleton width="70%" height="20px" />
+      </CardContent>
+    </Box>
+  );
+}
+
+type GameCardProps = Partial<Game> & { isLoading?: boolean };
+
+export default function GameCard(props: GameCardProps) {
+  const { isLoading, ...game } = props;
+
+  if (isLoading) return <CardSkeleton />;
+  return (
+    <Box borderRadius="lg" key={game.id} bg="slate.800">
       <Image
         style={{
           overflow: "hidden",
@@ -19,7 +42,7 @@ export default function GameCard(game: Game) {
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
         }}
-        alt={game.name}
+        alt={game?.name || ""}
         src={game.background_image || ""}
         width={300}
         height={150}
@@ -30,6 +53,6 @@ export default function GameCard(game: Game) {
           <Rating value={game.metacritic} />
         </HStack>
       </CardContent>
-    </styled.div>
+    </Box>
   );
 }

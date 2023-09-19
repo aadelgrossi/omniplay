@@ -1,9 +1,10 @@
 import "./globals.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import type { Metadata } from "next";
 import { Sarabun } from "next/font/google";
 
-import AppProvider from "./provider";
+import Providers from "./providers";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sarabun.className}>
-        <AppProvider>{children}</AppProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

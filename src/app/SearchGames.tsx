@@ -1,12 +1,14 @@
 "use client";
 
 import { Masonry } from "masonic";
+import { list } from "radash";
 import { useState } from "react";
 
 import GameCard from "@/components/GameCard";
 import Input from "@/components/Input";
 import { useGetGames } from "@/services/getGames";
 import { Game } from "@/services/types";
+import { Grid } from "@/styled-system/jsx";
 import { token } from "@/styled-system/tokens";
 
 type ListGamesProps = {
@@ -15,8 +17,19 @@ type ListGamesProps = {
 };
 
 const ListGames = ({ results, isLoading }: ListGamesProps) => {
-  if (isLoading) return <p>loading</p>;
-  if (!results?.length) return <></>;
+  if (isLoading) {
+    return (
+      <Grid
+        marginTop={6}
+        gap={5}
+        gridTemplateColumns="repeat(auto-fill, minmax(280px, 1fr));"
+      >
+        {list(20).map((item) => (
+          <GameCard key={item} isLoading />
+        ))}
+      </Grid>
+    );
+  }
   return (
     <Masonry
       style={{

@@ -5,7 +5,7 @@ const Value = styled("span", {
   base: { color: "slate.900", fontWeight: "semibold" },
 });
 
-export default function Rating({ value }: { value: number }) {
+export default function Rating({ value }: { value?: number }) {
   if (!value) return <></>;
 
   if (value <= 40)
