@@ -4,12 +4,17 @@ type Platform = {
   name: string;
 }
 
+type ParentPlatform = {
+  platform: Platform
+}
+
 export type Game = {
   id: number
   slug: string
   name: string
   background_image: string;
   platforms: Platform[]
+  parent_platforms: ParentPlatform[]
   released: string
   metacritic: number
   short_screenshots: Array<{

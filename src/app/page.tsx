@@ -1,5 +1,4 @@
 import Container from "@/components/Container";
-import Input from "@/components/Input";
 import { styled, VStack } from "@/styled-system/jsx";
 
 import SearchGames from "./SearchGames";
