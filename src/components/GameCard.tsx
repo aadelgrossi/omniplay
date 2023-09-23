@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { cloneElement } from "react";
 import { BsAndroid2 } from "react-icons/bs";
 import {
@@ -50,6 +51,21 @@ const Platforms = styled(HStack, {
   },
 });
 
+const CardWrapper = styled(Box, {
+  base: {
+    cursor: "pointer",
+    transform: "scale(1)",
+    transition: "transform 0.1s ease-in-out",
+    _hover: {
+      outline: "2px solid black",
+      outlineColor: "primary",
+      transform: "scale(1.02)",
+    },
+    borderRadius: "lg",
+    bg: "slate.800",
+  },
+});
+
 const platformIconLookup: { [key: string]: JSX.Element } = {
   android: <BsAndroid2 />,
   pc: <FaWindows />,
@@ -81,40 +97,44 @@ export default function GameCard(props: GameCardProps) {
 
   if (isLoading) return <CardSkeleton />;
   return (
-    <Box borderRadius="lg" key={game.id} bg="slate.800">
-      <Image
-        style={{
-          overflow: "hidden",
-          width: "100%",
-          aspectRatio: "16/9",
-          borderTopLeftRadius: 8,
-          borderTopRightRadius: 8,
-          objectFit: "cover",
-        }}
-        alt={game?.name || ""}
-        src={game.background_image || ""}
-        width={300}
-        height={150}
-      />
-      <CardContent>
-        <Platforms>
-          {game.parent_platforms?.map(({ platform }) => (
-            <>
-              {cloneElement(platformIconLookup[platform.slug], {
-                title: platform.name,
-              })}
-            </>
-          ))}
-        </Platforms>
+    <Link href={game.slug || "/"}>
+      <CardWrapper key={game.id}>
+        <Image
+          style={{
+            overflow: "hidden",
+            width: "100%",
+            aspectRatio: "16/9",
+            borderTopLeftRadius: 8,
+            borderTopRightRadius: 8,
+            objectFit: "cover",
+          }}
+          alt={game?.name || ""}
+          src={game.background_image || ""}
+          width={300}
+          height={150}
+        />
+        <CardContent>
+          <Platforms>
+            {game.parent_platforms?.map(({ platform }) => (
+              <>
+                {cloneElement(platformIconLookup[platform.slug], {
+                  title: platform.name,
+                })}
+              </>
+            ))}
+          </Platforms>
 
-        <HStack gap={2} alignItems="center" justifyContent="space-between">
-          <Title title={game.name}>{game.name}</Title>
-          <Rating value={game.metacritic} />
-        </HStack>
-        {Number(game?.genres?.length) > 0 && (
-          <Genres>{game?.genres?.map((genre) => genre.name).join(", ")}</Genres>
-        )}
-      </CardContent>
-    </Box>
+          <HStack gap={2} alignItems="center" justifyContent="space-between">
+            <Title title={game.name}>{game.name}</Title>
+            <Rating value={game.metacritic} />
+          </HStack>
+          {Number(game?.genres?.length) > 0 && (
+            <Genres>
+              {game?.genres?.map((genre) => genre.name).join(", ")}
+            </Genres>
+          )}
+        </CardContent>
+      </CardWrapper>
+    </Link>
   );
 }
