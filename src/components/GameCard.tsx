@@ -84,7 +84,12 @@ function CardSkeleton() {
     <Box borderRadius="lg" bg="slate.800">
       <Skeleton width="100%" height="200px" style={{ lineHeight: "unset" }} />
       <CardContent>
-        <Skeleton width="70%" height="20px" />
+        <Skeleton width="120px" height="16px" />
+        <HStack width="full" justifyContent="space-between">
+          <Skeleton width="260px" height="24px" />
+          <Skeleton width="28px" height="28px" />
+        </HStack>
+        <Skeleton width="160px" height="12px" />
       </CardContent>
     </Box>
   );

@@ -8,7 +8,7 @@ import GameCard from "@/components/GameCard";
 import Input from "@/components/Input";
 import Pagination from "@/components/Pagination";
 import { useGetGames } from "@/services/getGames";
-import { Game } from "@/services/types";
+import type { Game } from "@/services/types";
 import { Grid, HStack } from "@/styled-system/jsx";
 
 type ListGamesProps = {
