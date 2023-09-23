@@ -10,7 +10,7 @@ const getAdditionsByGameId = async (gameId: number) => {
 
 export const useGetGameAdditionsByGameId = (gameId: number) => {
   return useQuery({
-    queryKey: [`game-id-${gameId}-additions`],
+    queryKey: [gameId],
     queryFn: () => getAdditionsByGameId(gameId),
   });
 };

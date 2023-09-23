@@ -14,7 +14,7 @@ const getSingleGameFromId = async (gameId: number) => {
 
 export const useGetSingleGameById = (gameId: number) => {
   return useQuery({
-    queryKey: [`game-id-${gameId}`],
+    queryKey: [gameId],
     queryFn: () => getSingleGameFromId(gameId),
   });
 };

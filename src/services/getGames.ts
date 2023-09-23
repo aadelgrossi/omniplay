@@ -44,8 +44,7 @@ export const useGetGames = (args: GamesQueryArgs) => {
       "games",
       { search: args.search, page: args.page, size: args.page_size },
     ],
-    queryFn: () => getGames(args),
-    staleTime: 3 * 60 * 1000,
+    queryFn: () => getGames(args)
   });
 };
 
