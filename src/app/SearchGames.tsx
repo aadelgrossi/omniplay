@@ -7,6 +7,7 @@ import { useDebounce } from "react-use";
 import GameCard from "@/components/GameCard";
 import Input from "@/components/Input";
 import Pagination from "@/components/Pagination";
+import Select from "@/components/Select";
 import { useGetGames } from "@/services/getGames";
 import type { Game } from "@/services/types";
 import { Grid, HStack } from "@/styled-system/jsx";
@@ -64,7 +65,7 @@ export default function SearchGames() {
     if (isFetched) {
       setTotalPages(Math.ceil(Number(data?.count) / pageSize));
     }
-  }, [isFetched]);
+  }, [isFetched, pageSize]);
 
   useEffect(() => {
     if (search) {
@@ -84,6 +85,16 @@ export default function SearchGames() {
           page={page}
           next={() => setPage((page) => page + 1)}
           prev={() => setPage((page) => page - 1)}
+        />
+        <Select
+          value={pageSize.toString()}
+          onValueChange={(value) => setPageSize(Number(value))}
+          options={[
+            { label: "Show 10 items", value: 10 },
+            { label: "Show 20 items", value: 20 },
+            { label: "Show 50 items", value: 50 },
+            { label: "Show 100 items", value: 100 },
+          ]}
         />
       </HStack>
       <ListGames results={data?.results} isLoading={isLoading || isFetching} />
