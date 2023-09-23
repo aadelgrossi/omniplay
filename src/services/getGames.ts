@@ -6,8 +6,9 @@ import { Game } from "./types";
 type GamesQueryArgs = {
   search?: string;
   ordering?: "metacritic";
-  dates?: string;
+  metacritic?: string;
   page_size?: number;
+  page?: number;
 };
 
 type GamesQueryResponse = {
@@ -18,12 +19,20 @@ type GamesQueryResponse = {
 const getGames = async (args: GamesQueryArgs) => {
   const {
     ordering = "-metacritic",
-    dates,
     page_size = 20,
-    search
+    page,
+    search,
   } = args;
   const { data } = await api.get<GamesQueryResponse>("/games", {
-    params: { ordering, dates, page_size, search, search_exact: true },
+    params: {
+      ordering,
+      dates: search ? undefined : "2022-01-01,2023-12-01",
+      page_size,
+      page,
+      metacritic: search ? undefined : "80,100",
+      search,
+      search_exact: true,
+    },
   });
 
   return data;
@@ -31,8 +40,12 @@ const getGames = async (args: GamesQueryArgs) => {
 
 export const useGetGames = (args: GamesQueryArgs) => {
   return useQuery({
-    queryKey: ["games",`games-${args.search}`],
+    queryKey: [
+      "games",
+      { search: args.search, page: args.page, size: args.page_size },
+    ],
     queryFn: () => getGames(args),
+    staleTime: 3 * 60 * 1000,
   });
 };
 
