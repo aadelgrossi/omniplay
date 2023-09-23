@@ -14,7 +14,6 @@ import { TbWorld } from "react-icons/tb";
 import Skeleton from "react-loading-skeleton";
 
 import { Game } from "@/services/types";
-import { css } from "@/styled-system/css";
 import { Box, HStack, styled } from "@/styled-system/jsx";
 
 import Rating from "./Rating";
@@ -28,6 +27,26 @@ const Title = styled("h2", {
     textOverflow: "ellipsis",
     whiteSpace: "pre",
     maxWidth: "280px",
+  },
+});
+
+const Genres = styled("p", {
+  base: {
+    textStyle: "body",
+    color: "slate.400",
+    fontSize: "sm",
+  },
+});
+
+const Platforms = styled(HStack, {
+  base: {
+    gap: 2.5,
+    mb: 1,
+    "& svg": {
+      fill: "gray.300",
+      width: 3.5,
+      height: 3.5,
+    },
   },
 });
 
@@ -78,17 +97,7 @@ export default function GameCard(props: GameCardProps) {
         height={150}
       />
       <CardContent>
-        <HStack
-          gap={2.5}
-          mb={1}
-          className={css({
-            "& svg": {
-              fill: "gray.300",
-              width: 3.5,
-              height: 3.5,
-            },
-          })}
-        >
+        <Platforms>
           {game.parent_platforms?.map(({ platform }) => (
             <>
               {cloneElement(platformIconLookup[platform.slug], {
@@ -96,12 +105,15 @@ export default function GameCard(props: GameCardProps) {
               })}
             </>
           ))}
-        </HStack>
+        </Platforms>
 
         <HStack gap={2} alignItems="center" justifyContent="space-between">
           <Title title={game.name}>{game.name}</Title>
           <Rating value={game.metacritic} />
         </HStack>
+        {Number(game?.genres?.length) > 0 && (
+          <Genres>{game?.genres?.map((genre) => genre.name).join(", ")}</Genres>
+        )}
       </CardContent>
     </Box>
   );
