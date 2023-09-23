@@ -23,7 +23,7 @@ const getGames = async (args: GamesQueryArgs) => {
     search
   } = args;
   const { data } = await api.get<GamesQueryResponse>("/games", {
-    params: { ordering, dates, page_size, search },
+    params: { ordering, dates, page_size, search, search_exact: true },
   });
 
   return data;
