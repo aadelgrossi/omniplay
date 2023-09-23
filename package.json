@@ -6,7 +6,7 @@
     "prepare": "panda codegen",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -17,13 +17,13 @@
     "axios": "^1.5.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
-    "masonic": "^3.7.0",
     "next": "13.4.19",
     "radash": "^11.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "react-loading-skeleton": "^3.3.1",
+    "react-use": "^17.4.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {

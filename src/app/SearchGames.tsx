@@ -1,28 +1,27 @@
 "use client";
 
-import { Masonry } from "masonic";
 import { list } from "radash";
 import { useState } from "react";
+import { useDebounce } from "react-use";
 
 import GameCard from "@/components/GameCard";
 import Input from "@/components/Input";
 import { useGetGames } from "@/services/getGames";
 import { Game } from "@/services/types";
 import { Grid } from "@/styled-system/jsx";
-import { token } from "@/styled-system/tokens";
 
 type ListGamesProps = {
   results?: Game[];
   isLoading?: boolean;
 };
 
-const ListGames = ({ results, isLoading }: ListGamesProps) => {
+const ListGames = ({ results = [], isLoading }: ListGamesProps) => {
   if (isLoading) {
     return (
       <Grid
         marginTop={6}
         gap={5}
-        gridTemplateColumns="repeat(auto-fill, minmax(280px, 1fr));"
+        gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
       >
         {list(20).map((item) => (
           <GameCard key={item} isLoading />
@@ -30,35 +29,38 @@ const ListGames = ({ results, isLoading }: ListGamesProps) => {
       </Grid>
     );
   }
+
   return (
-    <Masonry
-      style={{
-        maxWidth: token("breakpoints.2xl"),
-        marginTop: token("spacing.6"),
-      }}
-      columnWidth={280}
-      columnGutter={20}
-      items={results || []}
-      render={(props) => <GameCard {...props.data} />}
-    />
+    <Grid
+      marginTop={6}
+      gap={5}
+      gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
+    >
+      {results.map((item) => (
+        <GameCard key={item.id} {...item} />
+      ))}
+    </Grid>
   );
 };
 
 export default function SearchGames() {
-  const [search, setSearch] = useState("");
+  const [inputValue, setInputValue] = useState<string | undefined>();
+  const [search, setSearch] = useState<string | undefined>();
 
-  const args = search
-    ? { search, dates: undefined }
-    : {
-        dates: "2023-01-01,2023-12-01",
-      };
+  useDebounce(() => setSearch(inputValue), 600, [inputValue]);
 
-  const { data, isLoading, isFetching } = useGetGames(args);
+  const { data, isLoading } = useGetGames({
+    search: search,
+    dates: search ? undefined : "2023-01-01,2023-12-01",
+  });
 
   return (
     <>
-      <Input value={search} onChange={(e) => setSearch(e.target.value)} />
-      <ListGames results={data?.results} isLoading={isLoading || isFetching} />
+      <Input
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <ListGames results={data?.results} isLoading={isLoading} />
     </>
   );
 }

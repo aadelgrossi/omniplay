@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import { SiNintendo, SiSega } from "react-icons/si";
+import { TbWorld } from "react-icons/tb";
 import Skeleton from "react-loading-skeleton";
 
 import { Game } from "@/services/types";
@@ -19,7 +20,16 @@ import { Box, HStack, styled } from "@/styled-system/jsx";
 import Rating from "./Rating";
 
 const CardContent = styled("div", { base: { p: 4 } });
-const Title = styled("h2", { base: { textStyle: "h2", color: "paper" } });
+const Title = styled("h2", {
+  base: {
+    textStyle: "h2",
+    color: "paper",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "pre",
+    maxWidth: "280px",
+  },
+});
 
 const platformIconLookup: { [key: string]: JSX.Element } = {
   android: <BsAndroid2 />,
@@ -31,18 +41,13 @@ const platformIconLookup: { [key: string]: JSX.Element } = {
   xbox: <FaXbox />,
   sega: <SiSega />,
   ios: <MdOutlinePhoneIphone />,
+  web: <TbWorld />,
 };
 
 function CardSkeleton() {
   return (
     <Box borderRadius="lg" bg="slate.800">
-      <Skeleton
-        width="100%"
-        height="200px"
-        style={{
-          lineHeight: "unset",
-        }}
-      />
+      <Skeleton width="100%" height="200px" style={{ lineHeight: "unset" }} />
       <CardContent>
         <Skeleton width="70%" height="20px" />
       </CardContent>
@@ -65,6 +70,7 @@ export default function GameCard(props: GameCardProps) {
           aspectRatio: "16/9",
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
+          objectFit: "cover",
         }}
         alt={game?.name || ""}
         src={game.background_image || ""}
@@ -92,7 +98,7 @@ export default function GameCard(props: GameCardProps) {
           ))}
         </HStack>
 
-        <HStack gap={2} alignItems="flex-start" justifyContent="space-between">
+        <HStack gap={2} alignItems="center" justifyContent="space-between">
           <Title title={game.name}>{game.name}</Title>
           <Rating value={game.metacritic} />
         </HStack>
