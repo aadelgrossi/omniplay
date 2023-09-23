@@ -6,7 +6,13 @@ import { SkeletonTheme } from "react-loading-skeleton";
 
 import { token } from "@/styled-system/tokens";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function AppProvider({ children }: { children: ReactNode }) {
   const baseColor = token("colors.slate.700");
