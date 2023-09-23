@@ -103,7 +103,7 @@ export default function GameCard(props: GameCardProps) {
   if (isLoading) return <CardSkeleton />;
   return (
     <Link href={game.slug || "/"}>
-      <CardWrapper key={game.id}>
+      <CardWrapper>
         <Image
           style={{
             overflow: "hidden",

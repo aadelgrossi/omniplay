@@ -11,7 +11,7 @@ import Pagination from "@/components/Pagination";
 import Select from "@/components/Select";
 import { useGetGames } from "@/services/getGames";
 import type { Game } from "@/services/types";
-import { Grid, HStack } from "@/styled-system/jsx";
+import { Grid, HStack, Stack } from "@/styled-system/jsx";
 
 type ListGamesProps = {
   results?: Game[];
@@ -31,7 +31,7 @@ function ListGames({ results = [], isLoading }: ListGamesProps) {
   return (
     <>
       {results.map((item) => (
-        <GameCard key={item.id} {...item} />
+        <GameCard {...item} key={item.slug} />
       ))}
     </>
   );
@@ -39,12 +39,12 @@ function ListGames({ results = [], isLoading }: ListGamesProps) {
 
 export default function SearchGames() {
   const router = useRouter();
-  const params = useSearchParams();
-  const searchParams = new URLSearchParams(params);
+  const initialParams = useSearchParams();
+  const searchParams = new URLSearchParams(initialParams);
 
-  const search = params.get("q") as string;
-  const page = (params.get("page") || 1) as number;
-  const pageSize = (params.get("page_size") || 10) as number;
+  const search = searchParams.get("q") || "";
+  const page = (searchParams.get("page") || 1) as number;
+  const pageSize = (searchParams.get("page_size") || 10) as number;
 
   const [totalPages, setTotalPages] = useState(1);
   const [inputValue, setInputValue] = useState(search);
@@ -52,7 +52,7 @@ export default function SearchGames() {
   useDebounce(
     () => {
       if (!inputValue) {
-        searchParams.delete("q");
+        searchParams.set("q", "");
         router.push(`/?${searchParams.toString()}`);
         return;
       }
@@ -89,34 +89,39 @@ export default function SearchGames() {
 
   return (
     <>
-      <HStack>
+      <Stack direction={["column", "row"]}>
         <Input
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <Pagination
-          totalPages={totalPages}
-          page={page}
-          next={() => {
-            searchParams.set("page", String(Number(page) + 1));
-            router.push(`/?${searchParams.toString()}`);
-          }}
-          prev={() => {
-            searchParams.set("page", String(Number(page) - 1));
-            router.push(`/?${searchParams.toString()}`);
-          }}
-        />
-        <Select
-          value={pageSize.toString()}
-          onValueChange={onChangePageSize}
-          options={[
-            { label: "Show 10 items", value: 10 },
-            { label: "Show 20 items", value: 20 },
-            { label: "Show 50 items", value: 50 },
-            { label: "Show 100 items", value: 100 },
-          ]}
-        />
-      </HStack>
+        <HStack
+          justifyContent={["space-around", "flex-start"]}
+          flexWrap={["wrap", "unset"]}
+        >
+          <Pagination
+            totalPages={totalPages}
+            page={page}
+            next={() => {
+              searchParams.set("page", String(Number(page) + 1));
+              router.push(`/?${searchParams.toString()}`);
+            }}
+            prev={() => {
+              searchParams.set("page", String(Number(page) - 1));
+              router.push(`/?${searchParams.toString()}`);
+            }}
+          />
+          <Select
+            value={pageSize.toString()}
+            onValueChange={onChangePageSize}
+            options={[
+              { label: "Show 10 items", value: 10 },
+              { label: "Show 20 items", value: 20 },
+              { label: "Show 50 items", value: 50 },
+              { label: "Show 100 items", value: 100 },
+            ]}
+          />
+        </HStack>
+      </Stack>
 
       <Grid
         marginTop={6}

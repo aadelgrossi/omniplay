@@ -6,7 +6,7 @@ import SearchGames from "./SearchGames";
 export default function Home() {
   return (
     <styled.main minHeight="100vh" backgroundColor="gray.900">
-      <Container>
+      <Container paddingBottom={10}>
         <VStack
           textAlign={["center", "flex-start"]}
           alignItems={["center", "flex-start"]}
