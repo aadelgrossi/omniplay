@@ -17,33 +17,24 @@ type ListGamesProps = {
   isLoading?: boolean;
 };
 
-const ListGames = ({ results = [], isLoading }: ListGamesProps) => {
-  if (isLoading) {
+function ListGames({ results = [], isLoading }: ListGamesProps) {
+  if (isLoading)
     return (
-      <Grid
-        marginTop={6}
-        gap={[2, 5]}
-        gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
-      >
+      <>
         {list(8).map((item) => (
           <GameCard key={item} isLoading />
         ))}
-      </Grid>
+      </>
     );
-  }
 
   return (
-    <Grid
-      marginTop={6}
-      gap={[2, 5]}
-      gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
-    >
+    <>
       {results.map((item) => (
         <GameCard key={item.id} {...item} />
       ))}
-    </Grid>
+    </>
   );
-};
+}
 
 export default function SearchGames() {
   const [inputValue, setInputValue] = useState<string | undefined>();
@@ -97,7 +88,17 @@ export default function SearchGames() {
           ]}
         />
       </HStack>
-      <ListGames results={data?.results} isLoading={isLoading || isFetching} />
+
+      <Grid
+        marginTop={6}
+        gap={[2, 5]}
+        gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
+      >
+        <ListGames
+          results={data?.results}
+          isLoading={isLoading || isFetching}
+        />
+      </Grid>
     </>
   );
 }
