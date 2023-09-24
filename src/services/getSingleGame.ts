@@ -3,20 +3,20 @@ import { useQuery } from '@tanstack/react-query';
 import api from "./api";
 import { Game } from "./types";
 
-const getSingleGameFromId = async (gameId: number) => {
+const getSingleGame = async (slug: string) => {
   try {
-    const { data } = await api.get<Game>(`games/${gameId}/additions`);
+    const { data } = await api.get<Game>(`games/${slug}`);
     return data;
   } catch {
     return null;
   }
 };
 
-export const useGetSingleGameById = (gameId: number) => {
+export const useGetSingleGame = (slug: string) => {
   return useQuery({
-    queryKey: [gameId],
-    queryFn: () => getSingleGameFromId(gameId),
+    queryKey: [slug],
+    queryFn: () => getSingleGame(slug),
   });
 };
 
-export default getSingleGameFromId;
+export default getSingleGame;
