@@ -56,6 +56,7 @@ const CardWrapper = styled(Box, {
     cursor: "pointer",
     transform: "scale(1)",
     transition: "transform 0.1s ease-in-out",
+    height: "full",
     _hover: {
       outline: "2px solid black",
       outlineColor: "primary",
@@ -133,11 +134,7 @@ export default function GameCard(props: GameCardProps) {
             <Title title={game.name}>{game.name}</Title>
             <Rating value={game.metacritic} />
           </HStack>
-          {Number(game?.genres?.length) > 0 && (
-            <Genres>
-              {game?.genres?.map((genre) => genre.name).join(", ")}
-            </Genres>
-          )}
+          <Genres>{game?.genres?.map((genre) => genre.name).join(", ")}</Genres>
         </CardContent>
       </CardWrapper>
     </Link>

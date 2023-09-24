@@ -17,12 +17,7 @@ type GamesQueryResponse = {
 };
 
 const getGames = async (args: GamesQueryArgs) => {
-  const {
-    ordering = "-metacritic",
-    page_size = 20,
-    page,
-    search,
-  } = args;
+  const { ordering = "-metacritic", page_size = 20, page, search } = args;
   const { data } = await api.get<GamesQueryResponse>("/games", {
     params: {
       ordering,
@@ -38,13 +33,11 @@ const getGames = async (args: GamesQueryArgs) => {
   return data;
 };
 
-export const useGetGames = (args: GamesQueryArgs) => {
+export const useGetGamesQuery = (args: GamesQueryArgs) => {
+  const { search, page, page_size } = args;
   return useQuery({
-    queryKey: [
-      "games",
-      { search: args.search, page: args.page, size: args.page_size },
-    ],
-    queryFn: () => getGames(args)
+    queryKey: ["games", { search, page, page_size }],
+    queryFn: () => getGames(args),
   });
 };
 

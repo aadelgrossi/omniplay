@@ -1,15 +1,12 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { list } from "radash";
-import { useEffect, useState } from "react";
-import { useDebounce } from "react-use";
 
 import GameCard from "@/components/GameCard";
 import Input from "@/components/Input";
 import Pagination from "@/components/Pagination";
 import Select from "@/components/Select";
-import { useGetGames } from "@/services/getGames";
+import useSearchGames from "@/hooks/useSearchGames";
 import type { Game } from "@/services/types";
 import { Grid, HStack, Stack } from "@/styled-system/jsx";
 
@@ -38,54 +35,18 @@ function ListGames({ results = [], isLoading }: ListGamesProps) {
 }
 
 export default function SearchGames() {
-  const router = useRouter();
-  const initialParams = useSearchParams();
-  const searchParams = new URLSearchParams(initialParams);
-
-  const search = searchParams.get("q") || "";
-  const page = (searchParams.get("page") || 1) as number;
-  const pageSize = (searchParams.get("page_size") || 10) as number;
-
-  const [totalPages, setTotalPages] = useState(1);
-  const [inputValue, setInputValue] = useState(search);
-
-  useDebounce(
-    () => {
-      if (!inputValue) {
-        searchParams.set("q", "");
-        router.push(`/?${searchParams.toString()}`);
-        return;
-      }
-      searchParams.set("q", inputValue);
-      router.push(`/?${searchParams.toString()}`);
-    },
-    600,
-    [inputValue]
-  );
-
-  const onChangePageSize = (value: string) => {
-    searchParams.set("page_size", value);
-    router.push(`/?${searchParams.toString()}`);
-  };
-
-  const { data, isLoading, isFetching, isFetched } = useGetGames({
-    search,
+  const {
+    games,
+    inputValue,
+    isLoading,
+    nextPage,
+    onChangePageSize,
     page,
-    page_size: pageSize,
-  });
-
-  useEffect(() => {
-    if (isFetched) {
-      setTotalPages(Math.ceil(Number(data?.count) / pageSize));
-    }
-  }, [isFetched, pageSize]);
-
-  useEffect(() => {
-    if (search) {
-      searchParams.set("page", "1");
-      router.push(`/?${searchParams.toString()}`);
-    }
-  }, [search]);
+    pageSize,
+    prevPage,
+    setInputValue,
+    totalPages,
+  } = useSearchGames();
 
   return (
     <>
@@ -101,14 +62,8 @@ export default function SearchGames() {
           <Pagination
             totalPages={totalPages}
             page={page}
-            next={() => {
-              searchParams.set("page", String(Number(page) + 1));
-              router.push(`/?${searchParams.toString()}`);
-            }}
-            prev={() => {
-              searchParams.set("page", String(Number(page) - 1));
-              router.push(`/?${searchParams.toString()}`);
-            }}
+            next={nextPage}
+            prev={prevPage}
           />
           <Select
             value={pageSize.toString()}
@@ -128,10 +83,7 @@ export default function SearchGames() {
         gap={[2, 5]}
         gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
       >
-        <ListGames
-          results={data?.results}
-          isLoading={isLoading || isFetching}
-        />
+        <ListGames results={games} isLoading={isLoading} />
       </Grid>
     </>
   );
