@@ -27,8 +27,8 @@ function ListGames({ results = [], isLoading }: ListGamesProps) {
 
   return (
     <>
-      {results.map((item) => (
-        <GameCard {...item} key={item.slug} />
+      {results.map((game) => (
+        <GameCard game={game} key={game.slug} />
       ))}
     </>
   );

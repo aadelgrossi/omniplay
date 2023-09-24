@@ -1,22 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cloneElement } from "react";
-import { BsAndroid2 } from "react-icons/bs";
-import {
-  FaApple,
-  FaLinux,
-  FaPlaystation,
-  FaWindows,
-  FaXbox,
-} from "react-icons/fa";
-import { MdOutlinePhoneIphone } from "react-icons/md";
-import { SiNintendo, SiSega } from "react-icons/si";
-import { TbWorld } from "react-icons/tb";
 import Skeleton from "react-loading-skeleton";
 
 import { Game } from "@/services/types";
 import { Box, HStack, styled } from "@/styled-system/jsx";
 
+import GameParentPlatforms from "./GameParentPlatforms";
 import Rating from "./Rating";
 
 const CardContent = styled("div", { base: { p: 4 } });
@@ -39,18 +28,6 @@ const Genres = styled("p", {
   },
 });
 
-const Platforms = styled(HStack, {
-  base: {
-    gap: 2.5,
-    mb: 1,
-    "& svg": {
-      fill: "gray.300",
-      width: 3.5,
-      height: 3.5,
-    },
-  },
-});
-
 const CardWrapper = styled(Box, {
   base: {
     cursor: "pointer",
@@ -66,19 +43,6 @@ const CardWrapper = styled(Box, {
     bg: "slate.800",
   },
 });
-
-const platformIconLookup: { [key: string]: JSX.Element } = {
-  android: <BsAndroid2 />,
-  pc: <FaWindows />,
-  mac: <FaApple />,
-  linux: <FaLinux />,
-  playstation: <FaPlaystation />,
-  nintendo: <SiNintendo />,
-  xbox: <FaXbox />,
-  sega: <SiSega />,
-  ios: <MdOutlinePhoneIphone />,
-  web: <TbWorld />,
-};
 
 function CardSkeleton() {
   return (
@@ -96,14 +60,17 @@ function CardSkeleton() {
   );
 }
 
-type GameCardProps = Partial<Game> & { isLoading?: boolean };
+type GameCardProps = {
+  game?: Game;
+  isLoading?: boolean;
+};
 
 export default function GameCard(props: GameCardProps) {
-  const { isLoading, ...game } = props;
+  const { isLoading, game } = props;
 
   if (isLoading) return <CardSkeleton />;
   return (
-    <Link href={game.slug || "/"}>
+    <Link href={game?.slug || "/"}>
       <CardWrapper>
         <Image
           style={{
@@ -115,24 +82,16 @@ export default function GameCard(props: GameCardProps) {
             objectFit: "cover",
           }}
           alt={game?.name || ""}
-          src={game.background_image || ""}
+          src={game?.background_image || ""}
           width={300}
           height={150}
         />
         <CardContent>
-          <Platforms>
-            {game.parent_platforms?.map(({ platform }) => (
-              <>
-                {cloneElement(platformIconLookup[platform.slug], {
-                  title: platform.name,
-                })}
-              </>
-            ))}
-          </Platforms>
+          <GameParentPlatforms parent_platforms={game?.parent_platforms} />
 
           <HStack gap={2} alignItems="center" justifyContent="space-between">
-            <Title title={game.name}>{game.name}</Title>
-            <Rating value={game.metacritic} />
+            <Title title={game?.name}>{game?.name}</Title>
+            <Rating value={game?.metacritic} />
           </HStack>
           <Genres>{game?.genres?.map((genre) => genre.name).join(", ")}</Genres>
         </CardContent>
