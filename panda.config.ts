@@ -26,8 +26,9 @@ export default defineConfig({
           h1: {
             value: {
               fontWeight: 'bold',
-              fontSize: '5xl',
-            }
+              fontSize: '6xl',
+              lineHeight:"1.5"
+            },
           },
           h2: {
             value: {

@@ -4,6 +4,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import type { Metadata } from "next";
 import { Sarabun } from "next/font/google";
 
+import { styled } from "@/styled-system/jsx";
+
 import Providers from "./providers";
 
 const sarabun = Sarabun({
@@ -24,9 +26,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={sarabun.className}>
-        <Providers>{children}</Providers>
-      </body>
+      <styled.body
+        minH="100vh"
+        bgColor="gray.900"
+        className={sarabun.className}
+      >
+        <Providers>
+          <styled.div
+            pb={10}
+            px={[2, 5]}
+            mx="auto"
+            width="full"
+            maxWidth={["100%", "breakpoint-2xl"]}
+          >
+            {children}
+          </styled.div>
+        </Providers>
+      </styled.body>
     </html>
   );
 }

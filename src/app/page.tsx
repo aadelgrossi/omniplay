@@ -1,27 +1,32 @@
-import Container from "@/components/Container";
-import { styled, VStack } from "@/styled-system/jsx";
+import { Stack, styled } from "@/styled-system/jsx";
 
 import SearchGames from "./SearchGames";
 
 export default function Home() {
   return (
-    <styled.main minHeight="100vh" backgroundColor="gray.900">
-      <Container paddingBottom={10}>
-        <VStack
-          textAlign={["center", "flex-start"]}
-          alignItems={["center", "flex-start"]}
-          gap={0}
+    <>
+      <Stack
+        direction={["column", "row"]}
+        textAlign={["center", "flex-start"]}
+        alignItems="center"
+        gap={[1, 5]}
+        pb={5}
+      >
+        <styled.h1 textStyle="h1" fontSize={["5xl", "6xl"]} color="primary">
+          OmniPlay
+        </styled.h1>
+        <styled.p
+          lineHeight="tight"
+          textAlign={["center", "left"]}
+          textStyle="body"
+          color="paper"
         >
-          <styled.h1 textStyle="h1" color="primary">
-            OmniPlay
-          </styled.h1>
-          <styled.p textStyle="body" color="paper">
-            Elevate Your Gaming Experience: Browse and discover the greatest
-            games out there!
-          </styled.p>
-        </VStack>
-        <SearchGames />
-      </Container>
-    </styled.main>
+          <styled.b fontSize="xl">Elevate Your Gaming Experience</styled.b>{" "}
+          <br />
+          Browse and discover the greatest games out there!
+        </styled.p>
+      </Stack>
+      <SearchGames />
+    </>
   );
 }
