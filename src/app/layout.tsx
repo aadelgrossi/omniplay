@@ -26,11 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <styled.body
-        minH="100vh"
-        bgColor="gray.900"
-        className={sarabun.className}
-      >
+      <styled.body bgColor="gray.900" className={sarabun.className}>
         <Providers>
           <styled.div
             pb={10}
