@@ -6,9 +6,10 @@ import GameCard from "@/components/GameCard";
 import Input from "@/components/Input";
 import Pagination from "@/components/Pagination";
 import Select from "@/components/Select";
-import useSearchGames from "@/hooks/useSearchGames";
 import type { Game } from "@/services/types";
-import { Grid, HStack, Stack } from "@/styled-system/jsx";
+import { Grid, HStack, Stack, styled } from "@/styled-system/jsx";
+
+import useSearchGames from "./useSearchGames";
 
 type ListGamesProps = {
   results?: Game[];
@@ -34,7 +35,7 @@ function ListGames({ results = [], isLoading }: ListGamesProps) {
   );
 }
 
-export default function SearchGames() {
+export default function SearchGamesLayout() {
   const {
     games,
     inputValue,
@@ -50,6 +51,28 @@ export default function SearchGames() {
 
   return (
     <>
+      <Stack
+        direction={["column", "row"]}
+        textAlign={["center", "flex-start"]}
+        alignItems="center"
+        gap={[1, 5]}
+        py={8}
+      >
+        <styled.h1 textStyle="h1" fontSize={["5xl", "6xl"]} color="primary">
+          OmniPlay
+        </styled.h1>
+        <styled.p
+          lineHeight="tight"
+          textAlign={["center", "left"]}
+          textStyle="body"
+          color="paper"
+        >
+          <styled.b fontSize="xl">Elevate Your Gaming Experience</styled.b>{" "}
+          <br />
+          Browse and discover the greatest games out there!
+        </styled.p>
+      </Stack>
+
       <Stack direction={["column", "row"]}>
         <Input
           value={inputValue}

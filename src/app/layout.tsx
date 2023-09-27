@@ -3,6 +3,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import type { Metadata } from "next";
 import { Sarabun } from "next/font/google";
+import { PropsWithChildren } from "react";
 
 import { styled } from "@/styled-system/jsx";
 
@@ -10,7 +11,7 @@ import Providers from "./providers";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -19,11 +20,7 @@ export const metadata: Metadata = {
     "Elevate Your Gaming Experience: Browse and discover the greatest games out there!",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <styled.body bgColor="gray.900" className={sarabun.className}>

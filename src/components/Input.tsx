@@ -1,8 +1,8 @@
-import { InputHTMLAttributes } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 import { styled } from "@/styled-system/jsx";
 
-export default function Input(props: InputHTMLAttributes<HTMLInputElement>) {
+export default function Input(props: ComponentPropsWithoutRef<"input">) {
   return (
     <styled.input
       width="full"
