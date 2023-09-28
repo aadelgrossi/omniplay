@@ -38,7 +38,14 @@ export type Game = {
   }>
 }
 
-export type GamesResponse = {
+export type Screenshot = {
+  id: number
+  image: string;
+  width: number
+  height:number
+}
+
+export type QueryResults<T> = {
   count: number;
-  results: Game[];
-};
+  results: T[]
+}

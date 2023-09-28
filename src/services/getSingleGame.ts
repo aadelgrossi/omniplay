@@ -14,7 +14,7 @@ const getSingleGame = async (slug: string) => {
 
 export const useGetSingleGame = (slug: string) => {
   return useQuery({
-    queryKey: [slug],
+    queryKey: ['game', slug],
     queryFn: () => getSingleGame(slug),
   });
 };

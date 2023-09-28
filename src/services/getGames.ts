@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import api from "./api";
-import { Game } from "./types";
+import { Game, QueryResults } from "./types";
 
 type GamesQueryArgs = {
   search?: string;
@@ -11,10 +11,7 @@ type GamesQueryArgs = {
   page?: number;
 };
 
-type GamesQueryResponse = {
-  count: number;
-  results: Game[];
-};
+type GamesQueryResponse = QueryResults<Game>
 
 const getGames = async (args: GamesQueryArgs) => {
   const { ordering = "-metacritic", page_size = 20, page, search } = args;
