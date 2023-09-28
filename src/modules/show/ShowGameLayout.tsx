@@ -7,13 +7,14 @@ import {
   FaShieldAlt,
   FaStar,
 } from "react-icons/fa";
-import { ImUpload } from "react-icons/im";
 
 import GameParentPlatforms from "@/components/GameParentPlatforms";
 import InfoCard from "@/components/InfoCard";
+import getGameScreenshots from "@/services/getGameScreenshots";
 import getSingleGame from "@/services/getSingleGame";
 import { Box, Grid, Stack, styled, VStack } from "@/styled-system/jsx";
-import { token } from "@/styled-system/tokens";
+
+import ScreenshotsGallery from "./ScreenshotsGallery";
 
 const ImageGradient = styled(Box, {
   base: {
@@ -21,10 +22,10 @@ const ImageGradient = styled(Box, {
     position: "absolute",
     right: 0,
     bottom: 0,
-    height: "70vh",
+    height: "80vh",
     bgGradient: "to-t",
     gradientFrom: "gray.900",
-    gradientVia: "gray.800",
+    gradientVia: "gray.900",
     gradientTo: "transparent",
     zIndex: -1,
   },
@@ -44,7 +45,7 @@ const StyledLink = styled(Link, {
 
 export default async function ShowGameLayout({ slug }: { slug: string }) {
   const game = await getSingleGame(slug);
-  const maxWidth = token("breakpoints.lg");
+  const screenshots = await getGameScreenshots(slug);
 
   return (
     <>
@@ -71,25 +72,17 @@ export default async function ShowGameLayout({ slug }: { slug: string }) {
       </StyledLink>
       <Stack
         direction={["column", "column", "column", "row"]}
-        mt={[2, 5]}
-        gap={[2, 2, 2, 8]}
+        my={[2, 5]}
+        gap={[2, 2, 4, 8, 12]}
       >
-        <Image
-          src={game?.background_image || ""}
-          alt={game?.name || ""}
-          width={500}
-          height={200}
-          style={{
-            maxWidth,
-            width: "100%",
-            objectFit: "cover",
-            borderRadius: "8px",
-          }}
+        <ScreenshotsGallery
+          screenshots={screenshots.results}
+          game={game?.name || ""}
         />
         <VStack
           width="full"
           my={5}
-          gap={3}
+          gap={5}
           justifyContent="center"
           alignItems="flex-start"
         >
@@ -127,26 +120,17 @@ export default async function ShowGameLayout({ slug }: { slug: string }) {
               label="Developer"
               value={game?.developers[0].name}
             />
-
-            {Number(game?.publishers.length) > 0 && (
-              <InfoCard
-                icon={<ImUpload />}
-                label="Publisher"
-                value={game?.publishers?.[0]?.name}
-              />
-            )}
           </Grid>
         </VStack>
       </Stack>
-      <styled.h3 fontSize="2xl" color="paper">
+      <styled.h3 fontWeight="bold" fontSize="4xl" color="primary">
         About
       </styled.h3>
       <styled.pre
         fontFamily="inherit"
         borderRadius="lg"
-        bgColor="slate.900"
-        color="slate.400"
-        p={3}
+        fontSize={["medium", "medium", "large"]}
+        color="slate.200"
         whiteSpace="pre-line"
       >
         {game?.description_raw}

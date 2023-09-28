@@ -12,7 +12,7 @@ import { SiNintendo, SiSega } from "react-icons/si";
 import { TbWorld } from "react-icons/tb";
 
 import { Game } from "@/services/types";
-import { HStack, styled } from "@/styled-system/jsx";
+import { HStack } from "@/styled-system/jsx";
 import { token } from "@/styled-system/tokens";
 
 const platformIconLookup: { [key: string]: JSX.Element } = {
@@ -42,7 +42,7 @@ export default function GameParentPlatforms({
   parent_platforms,
   size = "sm",
 }: GameParentPlatformsProps) {
-  const fill = token("colors.slate.400");
+  const fill = token("colors.slate.300");
   return (
     <HStack gap={2.5} mb={1}>
       {parent_platforms?.map(({ platform }) => (
