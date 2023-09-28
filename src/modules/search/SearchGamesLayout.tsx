@@ -1,39 +1,12 @@
 "use client";
 
-import { list } from "radash";
-
-import GameCard from "@/components/GameCard";
 import Input from "@/components/Input";
 import Pagination from "@/components/Pagination";
 import Select from "@/components/Select";
-import type { Game } from "@/services/types";
-import { Grid, HStack, Stack, styled } from "@/styled-system/jsx";
+import { HStack, Stack, styled } from "@/styled-system/jsx";
 
+import SearchResults from "./SearchResults";
 import useSearchGames from "./useSearchGames";
-
-type ListGamesProps = {
-  results?: Game[];
-  isLoading?: boolean;
-};
-
-function ListGames({ results = [], isLoading }: ListGamesProps) {
-  if (isLoading)
-    return (
-      <>
-        {list(8).map((item) => (
-          <GameCard key={item} isLoading />
-        ))}
-      </>
-    );
-
-  return (
-    <>
-      {results.map((game) => (
-        <GameCard game={game} key={game.slug} />
-      ))}
-    </>
-  );
-}
 
 export default function SearchGamesLayout() {
   const {
@@ -47,6 +20,8 @@ export default function SearchGamesLayout() {
     prevPage,
     setInputValue,
     totalPages,
+    totalEntries,
+    resetSearch,
   } = useSearchGames();
 
   return (
@@ -83,6 +58,7 @@ export default function SearchGamesLayout() {
           flexWrap={["wrap", "unset"]}
         >
           <Pagination
+            totalEntries={totalEntries}
             totalPages={totalPages}
             page={page}
             next={nextPage}
@@ -101,13 +77,12 @@ export default function SearchGamesLayout() {
         </HStack>
       </Stack>
 
-      <Grid
-        marginTop={6}
-        gap={[2, 5]}
-        gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
-      >
-        <ListGames results={games} isLoading={isLoading} />
-      </Grid>
+      <SearchResults
+        search={inputValue}
+        resetSearch={resetSearch}
+        results={games}
+        isLoading={isLoading}
+      />
     </>
   );
 }

@@ -42,9 +42,10 @@ const useSearchGames = () => {
     page_size: pageSize,
   });
 
-  useEffect(() => {
-    const totalEntries = data?.count || 0
+  const totalEntries = data?.count || 0
 
+  useEffect(() => {
+    if (totalEntries === 0) return
     if (isFetched) {
       setTotalPages(Math.ceil(totalEntries / pageSize));
     }
@@ -67,6 +68,11 @@ const useSearchGames = () => {
     router.push(`/?${searchParams.toString()}`);
   };
 
+  const resetSearch = () => {
+    searchParams.delete("q");
+    setInputValue("")
+  }
+
   return {
     games: data?.results,
     inputValue,
@@ -78,6 +84,8 @@ const useSearchGames = () => {
     prevPage,
     setInputValue,
     totalPages,
+    totalEntries,
+    resetSearch,
   };
 };
 
