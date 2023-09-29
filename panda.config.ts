@@ -11,7 +11,8 @@ export default defineConfig({
     include: [
       "./src/components/**/*.tsx",
       "./src/app/**/*.tsx",
-      "./src/modules/**/*.tsx"
+      "./src/modules/**/*.tsx",
+      "./src/stories/**/*.tsx",
     ],
 
     // Files to exclude
