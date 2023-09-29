@@ -8,13 +8,17 @@ import {
   FaStar,
 } from "react-icons/fa";
 
+import GameCard from "@/components/GameCard";
 import GameParentPlatforms from "@/components/GameParentPlatforms";
 import InfoCard from "@/components/InfoCard";
+import getGameAdditions from "@/services/getGameAdditions";
 import getGameScreenshots from "@/services/getGameScreenshots";
 import getSingleGame from "@/services/getSingleGame";
 import { Box, Grid, Stack, styled, VStack } from "@/styled-system/jsx";
 
+import BackButton from "./BackButton";
 import ScreenshotsGallery from "./ScreenshotsGallery";
+import SectionBlock from "./SectionBlock";
 
 const ImageGradient = styled(Box, {
   base: {
@@ -46,9 +50,10 @@ const StyledLink = styled(Link, {
 export default async function ShowGameLayout({ slug }: { slug: string }) {
   const game = await getSingleGame(slug);
   const screenshots = await getGameScreenshots(slug);
+  const additions = await getGameAdditions(slug);
 
   return (
-    <>
+    <VStack alignItems="flex-start" w="full" gap={3}>
       <ImageGradient />
       <Image
         src={game?.background_image || ""}
@@ -64,12 +69,7 @@ export default async function ShowGameLayout({ slug }: { slug: string }) {
           opacity: 0.3,
         }}
       />
-      <StyledLink href="/">
-        <FaChevronLeft />
-        <styled.p color="paper" fontSize="lg">
-          Go back
-        </styled.p>
-      </StyledLink>
+      <BackButton />
       <Stack
         direction={["column", "column", "column", "row"]}
         my={[2, 5]}
@@ -110,31 +110,50 @@ export default async function ShowGameLayout({ slug }: { slug: string }) {
               label="ESRB Rating"
               value={game?.esrb_rating?.name}
             />
-            <InfoCard
-              icon={<FaStar />}
-              label="Metacritic Score"
-              value={game?.metacritic}
-            />
-            <InfoCard
-              icon={<FaGamepad />}
-              label="Developer"
-              value={game?.developers[0].name}
-            />
+            {game?.metacritic && (
+              <InfoCard
+                icon={<FaStar />}
+                label="Metacritic Score"
+                value={game?.metacritic}
+              />
+            )}
+            {Number(game?.developers.length) > 0 && (
+              <InfoCard
+                icon={<FaGamepad />}
+                label="Developer"
+                value={game?.developers[0].name}
+              />
+            )}
           </Grid>
         </VStack>
       </Stack>
-      <styled.h3 fontWeight="bold" fontSize="4xl" color="primary">
-        About
-      </styled.h3>
-      <styled.pre
-        fontFamily="inherit"
-        borderRadius="lg"
-        fontSize={["medium", "medium", "large"]}
-        color="slate.200"
-        whiteSpace="pre-line"
-      >
-        {game?.description_raw}
-      </styled.pre>
-    </>
+      {game?.description_raw && (
+        <SectionBlock heading="About">
+          <styled.pre
+            fontFamily="inherit"
+            borderRadius="lg"
+            fontSize={["medium", "medium", "large"]}
+            color="slate.200"
+            whiteSpace="pre-line"
+          >
+            {game?.description_raw}
+          </styled.pre>
+        </SectionBlock>
+      )}
+
+      {additions.count > 0 && (
+        <SectionBlock heading="DLC's">
+          <Grid
+            width="full"
+            gap={[2, 5]}
+            gridTemplateColumns="repeat(auto-fill, minmax(360px, 1fr));"
+          >
+            {additions.results.map((game) => (
+              <GameCard key={game.id} game={game} />
+            ))}
+          </Grid>
+        </SectionBlock>
+      )}
+    </VStack>
   );
 }
