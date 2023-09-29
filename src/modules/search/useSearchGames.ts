@@ -63,7 +63,7 @@ const useSearchGames = () => {
     router.push(`/?${searchParams.toString()}`);
   };
 
-  const prevPage = () => {
+  const previousPage = () => {
     searchParams.set("page", String(Number(page) - 1));
     router.push(`/?${searchParams.toString()}`);
   };
@@ -81,7 +81,7 @@ const useSearchGames = () => {
     onChangePageSize,
     page,
     pageSize,
-    prevPage,
+    previousPage,
     setInputValue,
     totalPages,
     totalEntries,

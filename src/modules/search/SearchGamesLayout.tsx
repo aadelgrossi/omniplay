@@ -17,7 +17,7 @@ export default function SearchGamesLayout() {
     onChangePageSize,
     page,
     pageSize,
-    prevPage,
+    previousPage,
     setInputValue,
     totalPages,
     totalEntries,
@@ -62,7 +62,7 @@ export default function SearchGamesLayout() {
             totalPages={totalPages}
             page={page}
             next={nextPage}
-            prev={prevPage}
+            previous={previousPage}
           />
           <Select
             value={pageSize.toString()}

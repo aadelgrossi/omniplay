@@ -26,21 +26,16 @@ type PaginationProps = {
   totalPages: number;
   totalEntries: number;
   next: () => void;
-  prev: () => void;
+  previous: () => void;
 };
 
-export default function Pagination({
-  next,
-  prev,
-  page,
-  totalPages,
-  totalEntries,
-}: PaginationProps) {
+export default function Pagination(props: PaginationProps) {
+  const { next, previous, page, totalPages, totalEntries } = props;
   return (
     <HStack gap={3}>
       <PaginationControl
         disabled={page === 1 || !totalEntries}
-        onClick={() => prev()}
+        onClick={previous}
       >
         <FaChevronLeft />
       </PaginationControl>
