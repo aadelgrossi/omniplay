@@ -12,8 +12,9 @@ import { SiNintendo, SiSega } from "react-icons/si";
 import { TbWorld } from "react-icons/tb";
 
 import { Game } from "@/services/types";
-import { HStack } from "@/styled-system/jsx";
-import { token } from "@/styled-system/tokens";
+
+import { HStack } from "../../styled-system/jsx";
+import { token } from "../../styled-system/tokens";
 
 const platformIconLookup: { [key: string]: JSX.Element } = {
   android: <BsAndroid2 />,

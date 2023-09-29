@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 
-import { token } from "@/styled-system/tokens";
+import { token } from "../../styled-system/tokens";
 
 const queryClient = new QueryClient({
   defaultOptions: {

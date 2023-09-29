@@ -1,4 +1,4 @@
-import { styled } from "@/styled-system/jsx";
+import { styled } from "../../styled-system/jsx";
 
 const Box = styled("div", { base: { borderRadius: "md", px: 2, py: 1 } });
 const Value = styled("span", {

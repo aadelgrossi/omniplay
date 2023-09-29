@@ -1,4 +1,4 @@
-import { Stack, styled } from "@/styled-system/jsx";
+import { Stack, styled } from "../../styled-system/jsx";
 
 type InfoCardProps = {
   icon: JSX.Element;

@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from "react";
 
-import { styled } from "@/styled-system/jsx";
+import { styled } from "../../styled-system/jsx";
 
 export default function Input(props: ComponentPropsWithoutRef<"input">) {
   return (

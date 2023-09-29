@@ -1,6 +1,6 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import { HStack, styled } from "@/styled-system/jsx";
+import { HStack, styled } from "../../styled-system/jsx";
 
 const PaginationControl = styled("button", {
   base: {

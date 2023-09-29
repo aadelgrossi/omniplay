@@ -2,8 +2,8 @@ import type { SelectProps as RadixSelectProps } from "@radix-ui/react-select";
 import * as RadixSelect from "@radix-ui/react-select";
 import { FaChevronDown } from "react-icons/fa";
 
-import { css } from "@/styled-system/css";
-import { styled } from "@/styled-system/jsx";
+import { css } from "../../styled-system/css";
+import { styled } from "../../styled-system/jsx";
 
 type SelectProps = RadixSelectProps & {
   options: Array<{

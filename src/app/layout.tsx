@@ -5,8 +5,7 @@ import type { Metadata } from "next";
 import { Sarabun } from "next/font/google";
 import { PropsWithChildren } from "react";
 
-import { styled } from "@/styled-system/jsx";
-
+import { styled } from "../../styled-system/jsx";
 import Providers from "./providers";
 
 const sarabun = Sarabun({

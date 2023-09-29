@@ -3,8 +3,8 @@ import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 
 import { Game } from "@/services/types";
-import { Box, HStack, styled } from "@/styled-system/jsx";
 
+import { Box, HStack, styled } from "../../styled-system/jsx";
 import GameParentPlatforms from "./GameParentPlatforms";
 import Rating from "./Rating";
 
@@ -61,7 +61,16 @@ function CardSkeleton() {
 }
 
 type GameCardProps = {
-  game?: Game;
+  game?: Pick<
+    Game,
+    | "id"
+    | "name"
+    | "slug"
+    | "background_image"
+    | "parent_platforms"
+    | "genres"
+    | "metacritic"
+  >;
   isLoading?: boolean;
 };
 
