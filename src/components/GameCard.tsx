@@ -16,7 +16,7 @@ const Title = styled("h2", {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "pre",
-    maxWidth: "280px",
+    maxWidth: "95%",
   },
 });
 
