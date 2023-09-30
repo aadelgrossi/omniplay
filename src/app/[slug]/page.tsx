@@ -1,4 +1,7 @@
+import { notFound } from "next/navigation";
+
 import ShowGameLayout from "@/modules/show/ShowGameLayout";
+import getSingleGame from "@/services/getSingleGame";
 
 type ShowGameProps = {
   params: {
@@ -7,5 +10,8 @@ type ShowGameProps = {
 };
 
 export default async function ShowGame({ params }: ShowGameProps) {
-  return <ShowGameLayout slug={params.slug} />;
+  const game = await getSingleGame(params.slug);
+
+  if (!game) return notFound();
+  return <ShowGameLayout game={game} />;
 }

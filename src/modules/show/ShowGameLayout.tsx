@@ -7,7 +7,7 @@ import GameParentPlatforms from "@/components/GameParentPlatforms";
 import InfoCard from "@/components/InfoCard";
 import getGameAdditions from "@/services/getGameAdditions";
 import getGameScreenshots from "@/services/getGameScreenshots";
-import getSingleGame from "@/services/getSingleGame";
+import { Game } from "@/services/types";
 
 import { Box, Grid, Stack, styled, VStack } from "../../../styled-system/jsx";
 import ScreenshotsGallery from "./ScreenshotsGallery";
@@ -27,10 +27,9 @@ const ImageGradient = styled(Box, {
   },
 });
 
-export default async function ShowGameLayout({ slug }: { slug: string }) {
-  const game = await getSingleGame(slug);
-  const screenshots = await getGameScreenshots(slug);
-  const additions = await getGameAdditions(slug);
+export default async function ShowGameLayout({ game }: { game: Game }) {
+  const screenshots = await getGameScreenshots(game.slug);
+  const additions = await getGameAdditions(game.slug);
 
   return (
     <VStack alignItems="flex-start" w="full" gap={3}>
