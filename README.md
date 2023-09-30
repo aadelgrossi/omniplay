@@ -22,15 +22,14 @@ then add your API key value for `NEXT_PUBLIC_RAWG_API_KEY` (obtain one at https:
 ### 4. Install dependencies and generate styled system
 
 ```bash
-pnpm install
 yarn install
 ```
 
 ### 5. Run a local build
 
 ```bash
-pnpm run start
 yarn start
 ```
+
 
 The application should be available at `http://localhost:3000`
