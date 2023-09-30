@@ -23,7 +23,7 @@ export default function Button(props: ButtonProps) {
       borderRadius="lg"
       transition="background 0.2s ease"
       css={{
-        "& svg": {
+        "& > svg": {
           fill: "white",
           width: 5,
           height: 5,

@@ -11,7 +11,7 @@ const Container = styled(Center, {
     minHeight: "50vh",
     display: "flex",
     flexDir: "column",
-    "& svg": {
+    "& > div > svg": {
       width: "112px",
       height: "112px",
     },
