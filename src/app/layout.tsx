@@ -1,5 +1,4 @@
 import "./globals.css";
-import "react-loading-skeleton/dist/skeleton.css";
 
 import type { Metadata } from "next";
 import { Sarabun } from "next/font/google";

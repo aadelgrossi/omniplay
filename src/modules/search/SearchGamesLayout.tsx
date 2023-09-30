@@ -3,8 +3,8 @@
 import Input from "@/components/Input";
 import Pagination from "@/components/Pagination";
 import Select from "@/components/Select";
-import { HStack, Stack, styled } from "@/styled-system/jsx";
 
+import { HStack, Stack, styled } from "../../../styled-system/jsx";
 import SearchResults from "./SearchResults";
 import useSearchGames from "./useSearchGames";
 

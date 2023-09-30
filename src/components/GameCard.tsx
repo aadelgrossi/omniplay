@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import Skeleton from "react-loading-skeleton";
 
 import { Game } from "@/services/types";
 
 import { Box, HStack, styled } from "../../styled-system/jsx";
 import GameParentPlatforms from "./GameParentPlatforms";
 import Rating from "./Rating";
+import Skeleton from "./Skeleton";
 
 const CardContent = styled("div", { base: { p: 4 } });
 const Title = styled("h2", {
@@ -47,14 +47,14 @@ const CardWrapper = styled(Box, {
 function CardSkeleton() {
   return (
     <Box borderRadius="lg" bg="slate.800">
-      <Skeleton width="100%" height="200px" style={{ lineHeight: "unset" }} />
+      <Skeleton width="100%" aspectRatio="4/3" />
       <CardContent>
-        <Skeleton width="120px" height="16px" />
+        <Skeleton width="30%" height={4} />
         <HStack width="full" justifyContent="space-between">
-          <Skeleton width="260px" height="24px" />
-          <Skeleton width="28px" height="28px" />
+          <Skeleton width="75%" height={6} />
+          <Skeleton width={7} height={7} />
         </HStack>
-        <Skeleton width="160px" height="12px" />
+        <Skeleton width="45%" height={3} />
       </CardContent>
     </Box>
   );
@@ -85,7 +85,7 @@ export default function GameCard(props: GameCardProps) {
           style={{
             overflow: "hidden",
             width: "100%",
-            aspectRatio: "16/9",
+            aspectRatio: "4/3",
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8,
             objectFit: "cover",

@@ -3,7 +3,8 @@ import { FaUndo } from "react-icons/fa";
 
 import GameCard from "@/components/GameCard";
 import { Game } from "@/services/types";
-import { Center, Grid, styled } from "@/styled-system/jsx";
+
+import { Center, Grid, styled } from "../../../styled-system/jsx";
 
 type SearchResultsProps = {
   results?: Game[];
