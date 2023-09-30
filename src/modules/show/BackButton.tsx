@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FaChevronLeft } from "react-icons/fa";
 
-import { styled } from "@/styled-system/jsx";
+import { styled } from "../../../styled-system/jsx";
 
 export default function BackButton() {
   const router = useRouter();
@@ -17,7 +17,6 @@ export default function BackButton() {
       cursor="pointer"
       px={4}
       py={3}
-      mt={4}
       borderRadius="lg"
       transition="background 0.2s ease"
       onClick={router.back}

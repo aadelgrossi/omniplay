@@ -1,12 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import {
-  FaCalendar,
-  FaChevronLeft,
-  FaGamepad,
-  FaShieldAlt,
-  FaStar,
-} from "react-icons/fa";
+import { FaCalendar, FaGamepad, FaShieldAlt, FaStar } from "react-icons/fa";
 
 import GameCard from "@/components/GameCard";
 import GameParentPlatforms from "@/components/GameParentPlatforms";
@@ -14,8 +7,8 @@ import InfoCard from "@/components/InfoCard";
 import getGameAdditions from "@/services/getGameAdditions";
 import getGameScreenshots from "@/services/getGameScreenshots";
 import getSingleGame from "@/services/getSingleGame";
-import { Box, Grid, Stack, styled, VStack } from "@/styled-system/jsx";
 
+import { Box, Grid, Stack, styled, VStack } from "../../../styled-system/jsx";
 import BackButton from "./BackButton";
 import ScreenshotsGallery from "./ScreenshotsGallery";
 import SectionBlock from "./SectionBlock";
@@ -28,22 +21,9 @@ const ImageGradient = styled(Box, {
     bottom: 0,
     height: "80vh",
     bgGradient: "to-t",
-    gradientFrom: "gray.900",
-    gradientVia: "gray.900",
+    gradientFrom: "slate.900",
     gradientTo: "transparent",
     zIndex: -1,
-  },
-});
-
-const StyledLink = styled(Link, {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    pt: 5,
-    gap: 3,
-    "& svg": {
-      fill: "paper",
-    },
   },
 });
 
@@ -66,7 +46,7 @@ export default async function ShowGameLayout({ slug }: { slug: string }) {
           right: 0,
           width: "100%",
           objectFit: "cover",
-          opacity: 0.3,
+          opacity: 0.08,
         }}
       />
       <BackButton />
@@ -146,7 +126,7 @@ export default async function ShowGameLayout({ slug }: { slug: string }) {
           <Grid
             width="full"
             gap={[2, 5]}
-            gridTemplateColumns="repeat(auto-fill, minmax(360px, 1fr));"
+            gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
           >
             {additions.results.map((game) => (
               <GameCard key={game.id} game={game} />

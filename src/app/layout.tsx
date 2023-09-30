@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Sarabun } from "next/font/google";
 import { PropsWithChildren } from "react";
 
+import Header from "@/components/Header";
+
 import { styled } from "../../styled-system/jsx";
 import Providers from "./providers";
 
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <styled.body bgColor="gray.900" className={sarabun.className}>
+      <styled.body bgColor="slate.900" className={sarabun.className}>
         <Providers>
           <styled.div
             pb={10}
@@ -30,6 +32,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             width="full"
             maxWidth={["100%", "breakpoint-2xl"]}
           >
+            <Header />
             {children}
           </styled.div>
         </Providers>

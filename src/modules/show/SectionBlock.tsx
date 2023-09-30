@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import { styled, VStack } from "@/styled-system/jsx";
+import { styled, VStack } from "../../../styled-system/jsx";
 
 type SectionBlockProps = PropsWithChildren<{ heading: string }>;
 

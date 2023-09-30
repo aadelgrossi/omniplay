@@ -5,8 +5,9 @@ import Carousel from "nuka-carousel";
 import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 
 import { Screenshot } from "@/services/types";
-import { styled } from "@/styled-system/jsx";
-import { token } from "@/styled-system/tokens";
+
+import { styled } from "../../../styled-system/jsx";
+import { token } from "../../../styled-system/tokens";
 
 const ControlButton = styled("button", {
   base: {
