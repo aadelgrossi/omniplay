@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Stack, styled } from "../../styled-system/jsx";
 
 export default function Header() {
@@ -9,9 +11,11 @@ export default function Header() {
       gap={[1, 5]}
       py={8}
     >
-      <styled.h1 textStyle="h1" fontSize={["5xl", "6xl"]} color="primary">
-        OmniPlay
-      </styled.h1>
+      <Link href="/" style={{ cursor: "pointer" }}>
+        <styled.h1 textStyle="h1" fontSize={["5xl", "6xl"]} color="primary">
+          OmniPlay
+        </styled.h1>
+      </Link>
       <styled.p
         lineHeight="tight"
         textAlign={["center", "left"]}
