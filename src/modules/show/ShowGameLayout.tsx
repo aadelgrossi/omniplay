@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FaCalendar, FaGamepad, FaShieldAlt, FaStar } from "react-icons/fa";
 
+import BackButton from "@/components/BackButton";
 import GameCard from "@/components/GameCard";
 import GameParentPlatforms from "@/components/GameParentPlatforms";
 import InfoCard from "@/components/InfoCard";
@@ -9,7 +10,6 @@ import getGameScreenshots from "@/services/getGameScreenshots";
 import getSingleGame from "@/services/getSingleGame";
 
 import { Box, Grid, Stack, styled, VStack } from "../../../styled-system/jsx";
-import BackButton from "./BackButton";
 import ScreenshotsGallery from "./ScreenshotsGallery";
 import SectionBlock from "./SectionBlock";
 
@@ -49,7 +49,7 @@ export default async function ShowGameLayout({ slug }: { slug: string }) {
           opacity: 0.08,
         }}
       />
-      <BackButton />
+      <BackButton variant="ghost" />
       <Stack
         direction={["column", "column", "column", "row"]}
         my={[2, 5]}

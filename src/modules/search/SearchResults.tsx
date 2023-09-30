@@ -1,6 +1,7 @@
 import { list } from "radash";
 import { FaUndo } from "react-icons/fa";
 
+import Button from "@/components/Button";
 import GameCard from "@/components/GameCard";
 import { Game } from "@/services/types";
 
@@ -54,22 +55,10 @@ export default function SearchResults(props: SearchResultsProps) {
         >
           No results found for <span>&quot;{search}&quot;</span>
         </styled.p>
-        <styled.button
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          gap={2}
-          cursor="pointer"
-          bg="primary"
-          p={4}
-          lineHeight={1.25}
-          borderRadius="lg"
-          color="slate.200"
-          onClick={resetSearch}
-        >
+        <Button onClick={resetSearch}>
           <FaUndo />
           Reset search
-        </styled.button>
+        </Button>
       </Center>
     );
 
