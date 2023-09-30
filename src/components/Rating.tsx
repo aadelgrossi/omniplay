@@ -1,8 +1,12 @@
-import { styled } from "../../styled-system/jsx";
+import { Center, styled } from "../../styled-system/jsx";
 
-const Box = styled("div", { base: { borderRadius: "md", px: 2, py: 1 } });
+const Box = styled(Center, { base: { borderRadius: "md", w: 9, h: 9 } });
 const Value = styled("span", {
-  base: { color: "slate.900", fontWeight: "semibold" },
+  base: {
+    color: "slate.900",
+    fontSize: "lg",
+    fontWeight: "bold",
+  },
 });
 
 export default function Rating({ value }: { value?: number }) {

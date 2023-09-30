@@ -50,9 +50,9 @@ function CardSkeleton() {
       <Skeleton width="100%" aspectRatio="4/3" />
       <CardContent>
         <Skeleton width="30%" height={4} />
-        <HStack width="full" justifyContent="space-between">
+        <HStack width="full" justifyContent="space-between" my={1}>
           <Skeleton width="75%" height={6} />
-          <Skeleton width={7} height={7} />
+          <Skeleton width={9} height={9} borderRadius="md" />
         </HStack>
         <Skeleton width="45%" height={3} />
       </CardContent>

@@ -1,8 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Sarabun } from "next/font/google";
 
 import GameCard from "@/components/GameCard";
 
 import { styled } from "../../styled-system/jsx";
+
+const sarabun = Sarabun({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 const meta: Meta<typeof GameCard> = {
   title: "Components/GameCard",
@@ -12,7 +18,7 @@ const meta: Meta<typeof GameCard> = {
   },
   decorators: [
     (Story) => (
-      <styled.div maxWidth="300px">
+      <styled.div className={sarabun.className} width="300px">
         <Story />
       </styled.div>
     ),
