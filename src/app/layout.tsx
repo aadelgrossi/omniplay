@@ -23,17 +23,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <styled.body bgColor="slate.900" className={sarabun.className}>
+      <styled.body
+        px={[3, 5]}
+        pb={[3, 10]}
+        bgColor="slate.900"
+        className={sarabun.className}
+      >
         <Providers>
-          <styled.div
-            pb={10}
-            px={[2, 5]}
-            mx="auto"
-            width="full"
-            maxWidth={["100%", "breakpoint-2xl"]}
-          >
+          <styled.div mx="auto" maxWidth={["100%", "breakpoint-2xl"]}>
             <Header />
-            {children}
+            <main>{children}</main>
           </styled.div>
         </Providers>
       </styled.body>

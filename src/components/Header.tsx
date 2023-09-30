@@ -1,10 +1,11 @@
 import Link from "next/link";
 
-import { Stack, styled } from "../../styled-system/jsx";
+import { styled } from "../../styled-system/jsx";
 
 export default function Header() {
   return (
-    <Stack
+    <styled.header
+      display="flex"
       direction={["column", "row"]}
       textAlign={["center", "flex-start"]}
       alignItems="center"
@@ -25,6 +26,6 @@ export default function Header() {
         <styled.b fontSize="xl">Elevate Your Gaming Experience</styled.b> <br />
         Browse and discover the greatest games out there!
       </styled.p>
-    </Stack>
+    </styled.header>
   );
 }

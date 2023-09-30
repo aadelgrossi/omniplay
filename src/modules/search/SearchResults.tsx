@@ -22,7 +22,7 @@ export default function SearchResults(props: SearchResultsProps) {
       <Grid
         width="full"
         marginTop={6}
-        gap={[2, 5]}
+        gap={[3, 5]}
         gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
       >
         {list(8).map((item) => (
@@ -66,7 +66,7 @@ export default function SearchResults(props: SearchResultsProps) {
     <Grid
       width="full"
       marginTop={6}
-      gap={[2, 5]}
+      gap={[3, 5]}
       gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
     >
       {results.map((game) => (
