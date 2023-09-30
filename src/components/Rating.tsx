@@ -12,14 +12,10 @@ const Value = styled("span", {
 export default function Rating({ value }: { value?: number }) {
   if (!value) return <></>;
 
-  const rating = () => {
-    if (value <= 40) return "red.400";
-    if (value <= 80) return "yellow.400";
-    return "green.400";
-  };
-
   return (
-    <Box bg={rating()}>
+    <Box
+      bg={value <= 40 ? "red.400" : value <= 80 ? "yellow.400" : "green.400"}
+    >
       <Value>{value}</Value>
     </Box>
   );
