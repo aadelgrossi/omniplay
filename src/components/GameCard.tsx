@@ -91,7 +91,7 @@ export default function GameCard(props: GameCardProps) {
             objectFit: "cover",
           }}
           alt={game?.name || ""}
-          src={game?.background_image || ""}
+          src={game?.background_image || "/no-image.png"}
           width={300}
           height={150}
         />
