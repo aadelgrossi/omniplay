@@ -22,29 +22,33 @@ const PaginationControl = styled("button", {
 });
 
 type PaginationProps = {
-  page: number;
-  totalPages: number;
-  totalEntries: number;
-  next: () => void;
-  previous: () => void;
+  page?: number;
+  totalPages?: number;
+  totalEntries?: number;
+  next?: () => void;
+  previous?: () => void;
 };
 
 export default function Pagination(props: PaginationProps) {
-  const { next, previous, page, totalPages, totalEntries } = props;
+  const { next, previous, page = 1, totalPages = 1, totalEntries = 1 } = props;
   return (
     <HStack gap={3}>
       <PaginationControl
+        role="button"
+        title="previous-page"
         disabled={page === 1 || !totalEntries}
         onClick={previous}
       >
         <FaChevronLeft />
       </PaginationControl>
-      <styled.p width="max-content" color="paper">
+      <styled.p title="current-page" width="max-content" color="paper">
         Page <styled.b color="primary">{page}</styled.b> / {totalPages}
       </styled.p>
       <PaginationControl
+        role="button"
+        title="next-page"
         disabled={page === totalPages || !totalEntries}
-        onClick={() => next()}
+        onClick={next}
       >
         <FaChevronRight />
       </PaginationControl>
