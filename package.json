@@ -10,7 +10,8 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006 -s ./public",
     "build-storybook": "storybook build -s ./public",
-    "test": "vitest"
+    "test": "vitest",
+    "test:watch":"vitest --watch"
   },
   "dependencies": {
     "@radix-ui/react-select": "^1.2.2",
