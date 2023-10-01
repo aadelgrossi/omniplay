@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Game } from "@/services/types";
 
+import noImage from "../../public/no-image.png";
 import { Box, HStack, styled } from "../../styled-system/jsx";
 import GameParentPlatforms from "./GameParentPlatforms";
 import Rating from "./Rating";
@@ -91,7 +92,7 @@ export default function GameCard(props: GameCardProps) {
             objectFit: "cover",
           }}
           alt={game?.name || ""}
-          src={game?.background_image || "/no-image.png"}
+          src={game?.background_image || noImage}
           width={300}
           height={150}
         />
