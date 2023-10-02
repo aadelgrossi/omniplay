@@ -12,6 +12,8 @@ const wrapper = ({ children }: PropsWithChildren) => (
   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 );
 
+const push = vi.fn();
+
 const mocks = vi.hoisted(() => {
   return {
     usePathname: vi.fn(),
@@ -24,6 +26,7 @@ const mocks = vi.hoisted(() => {
 
 describe("useSearchGames", () => {
   beforeAll(() => {
+    mocks.useRouter.mockReturnValue({ push });
     server.listen();
   });
   it("initializes with default values for page, pageSize and totalPages", () => {
@@ -42,9 +45,6 @@ describe("useSearchGames", () => {
       page_size: "20",
     });
 
-    mocks.useRouter.mockReturnValue({
-      push: vi.fn(),
-    });
     mocks.useSearchParams.mockReturnValue(searchParams);
 
     const { result } = renderHook(() => useSearchGames(), { wrapper });
@@ -56,7 +56,6 @@ describe("useSearchGames", () => {
   it("clears value from query on resetSearch()", async () => {
     const searchParams = new URLSearchParams({ q: "horizon" });
 
-    mocks.useRouter.mockReturnValue({ push: vi.fn() });
     mocks.useSearchParams.mockReturnValue(searchParams);
 
     const { result } = renderHook(() => useSearchGames(), { wrapper });
@@ -71,9 +70,6 @@ describe("useSearchGames", () => {
   it("updates url when updating page_size", async () => {
     const searchParams = new URLSearchParams({ page_size: "10" });
 
-    const push = vi.fn();
-
-    mocks.useRouter.mockReturnValue({ push });
     mocks.useSearchParams.mockReturnValue(searchParams);
 
     const { result } = renderHook(() => useSearchGames(), { wrapper });
@@ -88,9 +84,6 @@ describe("useSearchGames", () => {
   it("updates url when updating page", async () => {
     const searchParams = new URLSearchParams({ page: "1" });
 
-    const push = vi.fn();
-
-    mocks.useRouter.mockReturnValue({ push });
     mocks.useSearchParams.mockReturnValue(searchParams);
 
     const { result } = renderHook(() => useSearchGames(), { wrapper });
