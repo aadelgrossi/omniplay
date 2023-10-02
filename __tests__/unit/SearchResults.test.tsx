@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import SearchResults from "@/modules/search/SearchResults";
 
-import gamesData from "../gamesData";
+import data from "../mocks/data";
 
 describe("SearchResults", () => {
   it("should render skeletons when loading", () => {
@@ -19,10 +19,10 @@ describe("SearchResults", () => {
     expect(noResults).toBeInTheDocument();
   });
 
-  it("should render game cards when results > 0", () => {
-    render(<SearchResults results={gamesData.results} />);
+  it("should render game cards when from results", () => {
+    render(<SearchResults results={data.results} />);
 
     const games = screen.getAllByTitle("game");
-    expect(games.length).toEqual(gamesData.results.length);
+    expect(games.length).toEqual(data.results.length);
   });
 });
