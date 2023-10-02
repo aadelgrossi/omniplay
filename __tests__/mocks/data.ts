@@ -1,5 +1,5 @@
 export default {
-  count: 3,
+  count: 5,
   next: "https://api.rawg.io/api/games?key=51b4b7957e7b4e63b18565cfe11176a0&page=2&page_size=2&search=horizon+zero+dawn",
   previous: null,
   results: [

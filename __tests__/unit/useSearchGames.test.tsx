@@ -94,4 +94,35 @@ describe("useSearchGames", () => {
 
     await waitFor(() => expect(push).toHaveBeenCalledWith(`/?page=2`));
   });
+  it("calculates total pages from total_entries / page_size", async () => {
+    const searchParams = new URLSearchParams({ page: "1", page_size: "5" });
+
+    mocks.useSearchParams.mockReturnValue(searchParams);
+
+    const { result } = renderHook(() => useSearchGames(), { wrapper });
+
+    await waitFor(() => expect(result.current.totalPages).toBe(1));
+
+    mocks.useSearchParams.mockReturnValue(
+      new URLSearchParams({ page: "1", page_size: "2" })
+    );
+
+    await waitFor(() => expect(result.current.totalPages).toBe(3));
+  });
+  it("resets to page 1 when changing search term", async () => {
+    mocks.useSearchParams.mockReturnValue(new URLSearchParams({ page: "2" }));
+
+    const { result } = renderHook(() => useSearchGames(), { wrapper });
+
+    await waitFor(() => expect(result.current.page).toBe(2));
+
+    act(() => {
+      result.current.setInputValue("horizon");
+      mocks.useSearchParams.mockReturnValue(
+        new URLSearchParams({ q: "horizon" })
+      );
+    });
+
+    await waitFor(() => expect(result.current.page).toBe(1));
+  });
 });
