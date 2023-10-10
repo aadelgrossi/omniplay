@@ -30,7 +30,7 @@ export default function Button(props: ButtonProps) {
         },
       }}
       _hover={{
-        background: variant === "solid" ? "primary" : "rgba(0,0,0,0.3)",
+        background: variant === "solid" ? "primary.hover" : "rgba(0,0,0,0.3)",
       }}
       {...rest}
     />
