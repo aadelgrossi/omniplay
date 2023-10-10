@@ -10,8 +10,8 @@ const useSearchGames = () => {
   const searchParams = new URLSearchParams(initialParams);
 
   const search = searchParams.get("q") || "";
-  const page = (searchParams.get("page") || 1) as number;
-  const pageSize = (searchParams.get("page_size") || 10) as number;
+  const page = Number((searchParams.get("page") || 1));
+  const pageSize = Number(searchParams.get("page_size") || 10);
 
   const [totalPages, setTotalPages] = useState(1);
   const [inputValue, setInputValue] = useState(search);

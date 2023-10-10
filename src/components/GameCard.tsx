@@ -47,7 +47,7 @@ const CardWrapper = styled(Box, {
 
 function CardSkeleton() {
   return (
-    <Box borderRadius="lg" bg="slate.800">
+    <Box title="loading" borderRadius="lg" bg="slate.800">
       <Skeleton width="100%" aspectRatio="4/3" />
       <CardContent>
         <Skeleton width="30%" height={4} />
@@ -61,7 +61,7 @@ function CardSkeleton() {
   );
 }
 
-type GameCardProps = {
+export type GameCardProps = {
   game?: Pick<
     Game,
     | "id"
@@ -81,7 +81,7 @@ export default function GameCard(props: GameCardProps) {
   if (isLoading) return <CardSkeleton />;
   return (
     <Link href={game?.slug || "/"}>
-      <CardWrapper>
+      <CardWrapper title="game">
         <Image
           style={{
             overflow: "hidden",

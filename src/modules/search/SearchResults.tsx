@@ -2,16 +2,15 @@ import { list } from "radash";
 import { FaUndo } from "react-icons/fa";
 
 import Button from "@/components/Button";
-import GameCard from "@/components/GameCard";
-import { Game } from "@/services/types";
+import GameCard, { GameCardProps } from "@/components/GameCard";
 
 import { Center, Grid, styled } from "../../../styled-system/jsx";
 
 type SearchResultsProps = {
-  results?: Game[];
+  results?: Array<GameCardProps["game"]>;
   isLoading?: boolean;
-  search: string;
-  resetSearch: () => void;
+  search?: string;
+  resetSearch?: () => void;
 };
 
 export default function SearchResults(props: SearchResultsProps) {
@@ -25,7 +24,7 @@ export default function SearchResults(props: SearchResultsProps) {
         gap={[3, 5]}
         gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
       >
-        {list(8).map((item) => (
+        {list(1, 8).map((item) => (
           <GameCard key={item} isLoading />
         ))}
       </Grid>
@@ -42,6 +41,7 @@ export default function SearchResults(props: SearchResultsProps) {
         width="full"
       >
         <styled.p
+          title="no-results"
           textAlign="center"
           fontSize="xl"
           color="slate.400"
@@ -70,7 +70,7 @@ export default function SearchResults(props: SearchResultsProps) {
       gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr));"
     >
       {results.map((game) => (
-        <GameCard game={game} key={game.slug} />
+        <GameCard game={game} key={game?.slug} />
       ))}
     </Grid>
   );

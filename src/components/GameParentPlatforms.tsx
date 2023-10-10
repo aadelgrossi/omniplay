@@ -1,4 +1,4 @@
-import { cloneElement } from "react";
+import { cloneElement, Fragment } from "react";
 import { BsAndroid2 } from "react-icons/bs";
 import {
   FaApple,
@@ -47,7 +47,7 @@ export default function GameParentPlatforms({
   return (
     <HStack gap={2.5} mb={1}>
       {parent_platforms?.map(({ platform }) => (
-        <>
+        <Fragment key={platform.name}>
           {cloneElement(platformIconLookup[platform.slug], {
             title: platform.name,
             style: {
@@ -56,7 +56,7 @@ export default function GameParentPlatforms({
               fill,
             },
           })}
-        </>
+        </Fragment>
       ))}
     </HStack>
   );

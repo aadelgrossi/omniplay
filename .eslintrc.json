@@ -1,7 +1,8 @@
 {
   "extends": [
     "next",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:testing-library/react"
   ],
   "plugins": [
     "simple-import-sort"
