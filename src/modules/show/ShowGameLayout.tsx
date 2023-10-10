@@ -77,18 +77,22 @@ export default async function ShowGameLayout({ game }: { game: Game }) {
             width="full"
             gridTemplateColumns="repeat(auto-fill,minmax(150px,1fr))"
           >
-            <InfoCard
-              icon={<FaCalendar />}
-              label="Release date"
-              value={new Intl.DateTimeFormat("en-US", {
-                dateStyle: "medium",
-              }).format(new Date(game?.released || ""))}
-            />
-            <InfoCard
-              icon={<FaShieldAlt />}
-              label="ESRB Rating"
-              value={game?.esrb_rating?.name}
-            />
+            {game.released && (
+              <InfoCard
+                icon={<FaCalendar />}
+                label="Release date"
+                value={new Intl.DateTimeFormat("en-US", {
+                  dateStyle: "medium",
+                }).format(new Date(game?.released || ""))}
+              />
+            )}
+            {game.esrb_rating && (
+              <InfoCard
+                icon={<FaShieldAlt />}
+                label="ESRB Rating"
+                value={game?.esrb_rating?.name}
+              />
+            )}
             {game?.metacritic && (
               <InfoCard
                 icon={<FaStar />}
